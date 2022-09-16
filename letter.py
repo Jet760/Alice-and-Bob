@@ -17,9 +17,15 @@ class Letter:
         self.read = True
 
     def encrypt(self):
+        """
+        Sets the encryption_status to True.
+        """
         self.encryption_status = True
 
     def decrypt(self):
+        """
+        Sets the encryption_status to False.
+        """
         self.encryption_status = False
 
     def check_if_readable(self):

@@ -4,15 +4,14 @@ from letter import Letter
 class Person:
     def __init__(self, name, waiting, recipient_of_letters, my_letterbox, po_letterbox):
         """
-        Alice loves writing letters to Bob and reading his responses <3
 
-        :param waiting: bool representing if Alice is waiting for a letter from Bob
+        :param waiting: bool representing if the person is waiting to receive a letter
         :param my_letterbox: This person's letterbox object
         :param po_letterbox: The post office's letterbox object
         """
         self.name = name
         self.waiting_response = waiting
-        self.recipient_of_letters = recipient_of_letters
+        self.recipient_of_letters = recipient_of_letters.lower()
         self.received_letters = []
         self.my_letterbox = my_letterbox
         self.post_office_letterbox = po_letterbox
@@ -26,6 +25,8 @@ class Person:
             content = "A letter for you!"
             print(f"{self.name} wrote a letter")
             letter = Letter(content, self.recipient_of_letters)
+            letter.encrypt()
+            print("The letter has been encrypted")
             self.put_letter_in_letterbox(letter)
         else:
             print("")
@@ -33,7 +34,7 @@ class Person:
 
     def put_letter_in_letterbox(self, letter):
         """
-        Puts the letter into Bob's letterbox.
+        Puts the letter into the post office's letterbox.
         Sets waiting bool to True.
         Prints out a string to show success.
 
@@ -75,6 +76,8 @@ class Person:
 
         :param letter: A letter object
         """
+        letter.decrypt()
+        print(f"{self.name} decrypted the letter")
         if letter.check_if_readable():
             print(f"{self.name} read the letter")
             letter.mark_as_read()
